@@ -1,0 +1,72 @@
+<%-include("../partials/header")%>
+<%-include("../partials/navbar")%>
+<%-include("../partials/flash")%>
+<link rel="stylesheet" href="/css/star.css">
+<style>
+  .img-fluid{
+    height: 100%;
+  }
+</style>
+
+<div class="row m-5">
+    
+
+  <div class="col-lg-6">
+    <h3 class="display-4">My Cart</h3>
+    <%for(let item of user.carts){%>
+      <div class="card mb-3" style="max-width: 600px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="<%=item.img%>" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%=item.name%></h5>
+              <p class="card-text"><%=item.desc.substring(0,135)%>...</p>
+              <form action="/user/<%=currUser._id%>/cart/<%=item._id%>?_method=delete" method="post">
+                <button class="btn btn-sm btn-danger">Remove</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <%}%>
+  </div>
+
+
+
+
+  <div class="col-lg-6" style="width: 35rem;">
+    <h3 class="display-4">Products</h3>
+    <ul class="list-group">
+      <%let sum=0;%>
+      <%for(let item of user.carts){%>
+      <li class="list-group-item"><%=item.name%> - <strong>&#8377; <%=item.price%></strong></li>
+      <%  sum+=item.price;
+      }%>
+  </ul>
+  <li class="list-group-item">Total Amount - <strong>&#8377; <%=sum%></strong></li>
+  <br>
+  <button class="btn btn-success">Procce To Pay</button>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+      
+</div>
+
+
+
+
+
+<%-include("../partials/footer")%>

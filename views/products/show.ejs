@@ -1,0 +1,97 @@
+<%-include("../partials/header")%>
+<%-include("../partials/navbar")%>
+<%-include("../partials/flash")%>
+<link rel="stylesheet" href="/css/star.css">
+
+
+<div class="row m-5">
+    
+    <div class="col-lg-6">
+        <div class="card" style="width: 25rem; padding: 0px;">
+            <img src="<%=prod.img%>" class="card-img-top" style="height: 230px;" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><%=prod.name%></h5>
+                <h5 class="card-title">&#8377; <%=prod.price%></h5>
+                <p class="card-text"><%=prod.desc%></p>
+                <div >
+                    <a href="#" class="btn btn-success">Buy</a>
+                    <form style="display: inline-block;"  action="/user/<%=prod._id%>/cart" method="post">
+                        <button class="btn btn-secondary">Add To Card</button>
+                    </form>
+                    <%if(currUser&&currUser.username==prod.owner){%>
+                    <a href="/product/<%=prod._id%>/edit" class="btn btn-warning">Edit</a>
+                    <form style="display: inline-block;"  class="mt-3" action="/product/<%=prod._id%>/delete?_method=delete" method="post">
+                      <button class="btn btn-danger">Delete</button>
+                    </form>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <h1>Leave a Review</h1>
+        <br>
+        <form action="/product/<%=prod._id%>/show/comment" novalidate="" class="needs-validation mb-5" method="post">
+            
+            
+            <!-- <label for="customRange1" class="form-label">Review</label>
+            <input type="range" name="rating" class="form-range" min="0" max="5" step="1" id="customRange1"> -->
+
+
+
+            <fieldset class="starability-basic">
+                <legend>Rating</legend>
+                <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating." />
+                <input type="radio" id="first-rate1" name="rating" value="1" />
+                <label for="first-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="first-rate2" name="rating" value="2" />
+                <label for="first-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="first-rate3" name="rating" value="3" />
+                <label for="first-rate3" title="Average">3 stars</label>
+                <input type="radio" id="first-rate4" name="rating" value="4" />
+                <label for="first-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="first-rate5" name="rating" value="5" />
+                <label for="first-rate5" title="Amazing">5 stars</label>
+              </fieldset>
+              
+                <br>
+                <br>
+
+
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                <textarea class="form-control" name="comment" id="exampleFormControlTextarea1" cols="10" rows="2"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+
+        <%for(let r of prod.reviews){%>
+        <div class="card mb-2">
+            <div class="card-body">
+                <p class="starability-result" data-rating="3">
+                  Rated: 3 stars
+                </p>
+                <p  style="text-transform: capitalize; color: gray;"> By <%=r.user%></p>
+              <p class="card-text"><strong>Review: </strong><%=r.comment%></p>
+              <%if(currUser&&r.user==currUser.username){%>
+                <form style="display: inline-block;" action="/product/<%=prod._id%>/<%=r._id%>" method="get">
+                    <button class="btn btn-primary">Edit</button>
+                </form>
+              <form style="display: inline-block;" action="/product/<%=prod._id%>/<%=r._id%>?_method=delete" method="post">
+                <button class="btn btn-danger">Delete</button>
+              </form>
+              <%}%>
+            </div>
+        </div>
+        <%}%>
+    </div>
+      
+</div>
+
+
+
+
+
+<%-include("../partials/footer")%>

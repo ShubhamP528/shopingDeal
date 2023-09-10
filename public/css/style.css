@@ -1,0 +1,24 @@
+.navbar-brand, .nav-link{
+    color: aliceblue; 
+}
+.navbar-text a, .navbar-text a:focus, .navbar-text a:hover{
+    color: aliceblue;
+}
+
+element.style {
+    margin-left: 10px;
+}
+.nav-link:focus, .nav-link:hover, .navbar-brand:focus, .navbar-brand:hover{
+    color: aliceblue;
+}
+
+.navbar-brand{
+    font-size: 30px;
+}
+
+.navbar{
+    background-color: lightseagreen;
+    height: 70px;
+    font-size: 20px;
+  }
+
