@@ -71,7 +71,7 @@ app.use((req,res,next)=>{
 
 app.use(express.static('public'));
 app.get('/',(req,res)=>{
-  res.send("This is a landing page");
+  res.render('products/start');
 })
 
 app.get('/error',(req,res)=>{
