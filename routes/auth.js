@@ -21,7 +21,6 @@ router.get('/register',async(req,res)=>{
 router.post('/register',async(req,res)=>{
     try
     {
-        console.log(req.body);
         const user=new User({email:req.body.email, userType:req.body.userType, username:req.body.username});
         await User.register(user,req.body.password);
         req.flash('success','Registered Successfully login and start' );
