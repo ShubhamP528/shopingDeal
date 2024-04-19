@@ -1,4 +1,5 @@
 const express = require("express");
+const useragent=require("express-useragent")
 const app = express();
 const mongoose = require("mongoose");
 // const Product=require('./model/product');
@@ -47,6 +48,8 @@ app.use(
 // app.use(cookieParser());
 app.use(flash());
 
+app.use(useragent.express());
+
 // initializing the passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -66,7 +69,8 @@ app.use((req, res, next) => {
 
 app.use(express.static("public"));
 app.get("/", (req, res) => {
-  res.render("products/start");
+  const showInstallPrompt=req.useragent.isChrome;
+  res.render("products/start",{showInstallPrompt});
 });
 
 app.get("/error", (req, res) => {
