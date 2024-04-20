@@ -41,21 +41,30 @@ router.get("/login", async (req, res) => {
 });
 
 // logined
-router.post("/login", async (req, res) => {
+router.post("/login", async (req, res,next) => {
   try {
     req.body.username = req.body.username.trim();
     req.body.password = req.body.password.trim();
     passport.authenticate("local", {
       failureRedirect: "/login",
       failureFlash: true,
-    });
-    req.flash("success", `Welcome Back!! ${req.body.username}`);
-    res.redirect("/product");
+    })(req, res, next); // Invoke the middleware with (req, res, next);
   } catch (e) {
     req.flash("error", `${e.message}`);
     res.redirect("/login");
   }
-});
+},async (req, res) => {
+  try{
+    req.flash("success", `Welcome Back!! ${req.body.username}`);
+    console.log(req.user); // This should now display the logged-in user
+    res.redirect("/product");
+  } catch (e) {
+    req.flash("error", `${e.message}`);
+    res.redirect("/login");
+
+  }
+}
+);
 
 router.get("/logout", (req, res) => {
   try {

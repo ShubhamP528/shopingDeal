@@ -9,7 +9,7 @@ const methodOverride = require("method-override");
 // const cookieParser=require('cookie-parser');
 const session = require("express-session");
 const flash = require("connect-flash");
-const localStrategy = require("passport-local");
+const localStrategy = require("passport-local").Strategy;
 const passport = require("passport");
 const User = require("./model/user");
 
@@ -84,5 +84,5 @@ app.use(cartRouter);
 // seedDB();
 
 app.listen(process.env.PORT || 3003, () => {
-  console.log("server running at port 3000");
+  console.log("server running at port 3003");
 });
