@@ -1,5 +1,5 @@
 const express = require("express");
-const useragent=require("express-useragent")
+const useragent = require("express-useragent");
 const app = express();
 const mongoose = require("mongoose");
 // const Product=require('./model/product');
@@ -35,6 +35,9 @@ mongoose
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(
@@ -67,10 +70,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static("public"));
 app.get("/", (req, res) => {
-  const showInstallPrompt=req.useragent.isChrome;
-  res.render("products/start",{showInstallPrompt});
+  const showInstallPrompt = req.useragent.isChrome;
+  res.render("products/start", { showInstallPrompt });
 });
 
 app.get("/error", (req, res) => {
