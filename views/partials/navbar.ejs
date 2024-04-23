@@ -35,7 +35,7 @@
           <a href="/login" class="nav-link">Login</a>
           <%} else {%>
             <div style="display: flex; gap: 15px;">
-              <a href="/user/<%=currUser._id%>" class="nav-link">Hello <%=currUser.username%> </a>
+              <a href="#" class="nav-link">Hello <%=currUser.username%> </a>
               <a href="/user/<%=currUser._id%>/cart" class="nav-link active"><i class="fas fa-shopping-cart"></i> 
               
                 <sup><span class="badge bg-danger"><%=currUser.carts.length%></span></sup> 
