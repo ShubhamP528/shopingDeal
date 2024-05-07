@@ -97,7 +97,9 @@
     <%for(let r of prod.reviews){%>
     <div class="card mb-2">
       <div class="card-body">
-        <p class="starability-result" data-rating="3">Rated: 3 stars</p>
+        <p class="starability-result" data-rating="<%= r.rating%>">
+          Rated: <%= r.rating%> stars
+        </p>
         <p style="text-transform: capitalize; color: gray">By <%=r.user%></p>
         <p class="card-text"><strong>Review: </strong><%=r.comment%></p>
         <%if(currUser&&r.user==currUser.username){%>
